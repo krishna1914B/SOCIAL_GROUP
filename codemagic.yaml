@@ -11,8 +11,8 @@ workflows:
     
     # Environment variables
     environment:
-      android_signing:
-        - SocialAppKeystore
+      # android_signing:
+        # - SocialAppKeystore
       groups:
         - google_credentials
         - cloudinary_credentials
