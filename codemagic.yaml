@@ -53,19 +53,19 @@ workflows:
       - name: Run tests
         script: |
           ./gradlew test
-      
-    # Artifacts
-        artifacts:
-          - app/build/outputs/**/*.apk
-          - app/build/outputs/**/*.aab
-          - app/build/outputs/**/mapping.txt
-          - flutter_drive.log
-        
-    # Publishing
-        publishing:
-          email:
-            recipients:
-              - name@example.com
-          slack:
-            channel: '#builds'
-            notify_on_build_start: true
+       
+# Artifacts
+    artifacts:
+      - app/build/outputs/**/*.apk
+      - app/build/outputs/**/*.aab
+      - app/build/outputs/**/mapping.txt
+      - flutter_drive.log
+    
+# Publishing
+    publishing:
+      email:
+        recipients:
+          - name@example.com
+      slack:
+        channel: '#builds'
+        notify_on_build_start: true
