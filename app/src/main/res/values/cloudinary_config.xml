@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Cloudinary Configuration -->
+    <!-- Your actual Cloudinary credentials -->
+    <string name="cloudinary_cloud_name">dduwnws1c</string>
+    <string name="cloudinary_api_key">299232436378198</string>
+    <string name="cloudinary_api_secret">gAH-qxx0TJ1GEd_HQKKC8PsW4Rs</string>
+</resources>
