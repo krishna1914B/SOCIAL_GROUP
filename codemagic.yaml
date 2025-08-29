@@ -1,0 +1,73 @@
+# Codemagic CI/CD configuration file
+# For more information, see https://docs.codemagic.io/yaml-basic-configuration/yaml-getting-started/
+
+# Workflow setup
+workflows:
+ # Android workflow
+  android-workflow:
+    name: Social App Android Workflow
+    max_build_duration: 120
+    instance_type: mac_mini_m1
+    
+    # Environment variables
+    environment:
+      android_signing:
+        - SocialAppKeystore
+      groups:
+        - google_credentials
+        - cloudinary_credentials
+      vars:
+        CLOUDINARY_URL: "cloudinary://299232436378198:gAH-qxx0TJ1GEd_HQKKC8PsW4Rs@dduwnws1c"
+    
+    # Triggering
+    triggering:
+      events:
+        - push
+        - pull_request
+        - tag
+      branch_patterns:
+        - pattern: '*'
+          include: true
+          source: true
+    
+    # Scripts
+    scripts:
+      - name: Decode google-services.json
+        script: |
+          echo $GOOGLE_SERVICES_JSON | base64 --decode > $CM_BUILD_DIR/app/google-services.json
+          
+      - name: Set up Cloudinary config
+        script: |
+          # Cloudinary credentials are already embedded in the app
+          # But we set the environment variable for any additional needs
+          echo "Cloudinary URL: $CLOUDINARY_URL"
+          
+      - name: Set up local properties
+        script: |
+          echo "sdk.dir=$ANDROID_SDK_ROOT" > "$CM_BUILD_DIR/local.properties"
+          
+      - name: Build Android app
+        script: |
+          ./gradlew assembleRelease
+      
+      - name: Run tests
+        script: |
+          ./gradlew test
+      
+    # Artifacts
+    artifacts:
+      - app/build/outputs/**/*.apk
+      - app/build/outputs/**/*.aab
+      - app/build/outputs/**/mapping.txt
+      - flutter_drive.log
+    
+    # Publishing
+    publishing:
+      email:
+        recipients:
+          - name@example.com
+      slack:
+        channel: '#builds'
+        notify_on_build_start: true
+        notify_on_build_success: true
+        notify_on_build_failure: true
