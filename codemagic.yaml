@@ -62,12 +62,10 @@ workflows:
       - flutter_drive.log
     
     # Publishing
-    publishing:
-      email:
-        recipients:
-          - name@example.com
-      slack:
-        channel: '#builds'
-        notify_on_build_start: true
-        notify_on_build_success: true
-        notify_on_build_failure: true
+        publishing:
+          email:
+            recipients:
+              - name@example.com
+          slack:
+            channel: '#builds'
+            notify_on_build_start: true
