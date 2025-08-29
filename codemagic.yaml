@@ -55,12 +55,12 @@ workflows:
           ./gradlew test
       
     # Artifacts
-    artifacts:
-      - app/build/outputs/**/*.apk
-      - app/build/outputs/**/*.aab
-      - app/build/outputs/**/mapping.txt
-      - flutter_drive.log
-    
+        artifacts:
+          - app/build/outputs/**/*.apk
+          - app/build/outputs/**/*.aab
+          - app/build/outputs/**/mapping.txt
+          - flutter_drive.log
+        
     # Publishing
         publishing:
           email:
